@@ -35,8 +35,8 @@ var util = require('util')
  */
 var Strategy = module.exports = function(options, verify) {
 	options = options || {};
-	options.authorizationURL = options.authorizationURL;
-	options.tokenURL = options.tokenURL;
+	options.authorizationURL = options.authorizationURL || 'https://www.stream.me/api-auth/authorize';
+	options.tokenURL = options.tokenURL || 'https://www.stream.me/api-auth/token';
 
 	OAuth2Strategy.call(this, options, verify);
 	this._oauth2._useAuthorizationHeaderForGET = true;
@@ -54,6 +54,9 @@ util.inherits(Strategy, OAuth2Strategy);
  *   - `id`
  *   - `username`
  *   - `displayName`
+ *   - `gender`
+ *   - `email`
+ *   - `birthdate`
  *
  * @param {String} accessToken
  * @param {Function} done
@@ -72,8 +75,12 @@ Strategy.prototype.userProfile = function(accessToken, done) {
 		try {
 			var json = JSON.parse(body);
 			var profile = { provider: 'streamme' };
-			profile.id = json.id;
+			profile.id = json.publicId;
 			profile.displayName = json.displayName;
+			profile.username = json.username;
+			profile.gender = json.gender;
+			profile.email = json.email;
+			profile.birthdate = json.birthdate;
 
 			profile._raw = body;
 			profile._json = json;
