@@ -1,12 +1,16 @@
 {
   "name": "passport-streamme-oauth2",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Streamme oauth implementation",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests"
   },
   "author": "Jordan <jordan@stream.me>",
+  "contributors": [{
+    "name": "Wes Todd",
+	"email": "wes@wesleytodd.com"
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/StreamMeBots/passport-streamme-oauth2.git"
