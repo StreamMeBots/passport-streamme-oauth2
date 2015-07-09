@@ -1,6 +1,4 @@
-# Passportjs Straegy for ouath2 integration with StreamMe.
-
-<img src="https://static1.stream.me/web/active/images/robot-avatar.png" width=30px; style="display= inline-block" />
+# <img src="https://static1.stream.me/web/active/images/robot-avatar.png" width=30px; style="display= inline-block" /> StreamMe Passport Strategy
 
 ## Alpha
 
