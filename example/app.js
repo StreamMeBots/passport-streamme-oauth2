@@ -3,17 +3,15 @@ var passport = require('passport'),
 	StreamMeStrategy = require('../index');
 
 passport.serializeUser(function(user, done) {
-  done(null, user);
+	done(null, user);
 });
 
 passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+	done(null, obj);
 });
 
 passport.use('streamme', 
 	new StreamMeStrategy({
-		authorizationURL: 'https://www.stream.me/api-auth/authorize',
-		tokenURL: 'https://www.stream.me/api-auth/token',
 		clientID: '',
 		clientSecret: '',
 		callbackURL: '',
@@ -28,7 +26,10 @@ passport.use('streamme',
 var app = express();
 app.use(passport.initialize());
 app.use(passport.session());
-app.get('/', passport.authenticate('streamme', { scope: ['account'] }));
+
+app.get('/', passport.authenticate('streamme', {
+	scope: ['account']
+}));
 
 app.get('/redirect', passport.authenticate('streamme', {
 	scope: ['account'], 
