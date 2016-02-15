@@ -41,6 +41,8 @@ var Strategy = module.exports = function(options, verify) {
 	OAuth2Strategy.call(this, options, verify);
 	this._oauth2._useAuthorizationHeaderForGET = true;
 	this.name = 'streamme';	
+
+	this._userProfileURL = options.userProfileURL || 'https://www.stream.me/api-user/v1/me';
 }
 
 util.inherits(Strategy, OAuth2Strategy);
@@ -63,7 +65,7 @@ util.inherits(Strategy, OAuth2Strategy);
  * @api protected
  */
 Strategy.prototype.userProfile = function(accessToken, done) {
-	this._oauth2.get('https://www.stream.me/api-user/v1/me', accessToken, function (err, body, res) {
+	this._oauth2.get(this._userProfileURL, accessToken, function (err, body, res) {
 		if (err) {
 			return done(new InternalOAuthError('failed to fetch user profile', err));
 		}
